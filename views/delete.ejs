@@ -15,23 +15,11 @@
 
 <div class="container">
 
-  <form method="post" action="/updatePic" enctype="application/x-www-form-urlencoded">
+  <form method="post" action="/deletePic" enctype="application/x-www-form-urlencoded">
     <div class="mb-3">
-      <input name="_id" class="form-control" placeholder="Drop an id picture you want to change here">
+      <input name="_id" class="form-control" placeholder="Drop an id picture you want to delete here">
     </div>
-    <div class="mb-3">
-      <label for="fname" class="form-label">New Picture Name</label>
-      <input name="tenAnhMoi" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="flink" class="form-label">New Picture Link</label>
-      <input name="linkAnhMoi" class="form-control">
-    </div>
-    <div class="mb-3">
-      <label for="ftitle" class="form-label">New Description</label>
-      <textarea name="noiDungMoi" class="form-control" rows="3"></textarea>
-    </div>
-    <button type="submit">Save</button>
+    <button type="submit">Delete</button>
     <h1><%=message%></h1>
   </form>
 

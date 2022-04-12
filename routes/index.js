@@ -19,9 +19,9 @@ router.get('/hcm', function(req, res, next) {
 router.get('/foreign', function(req, res, next) {
   res.render('category', { title: 'Foreign' });
 });
-router.get('/list', function(req, res, next) {
+router.get('/delete', function(req, res, next) {
   Image.find({}, function (err, data) {
-    res.render('list', {data: data, title: 'List'});
+    res.render('delete', {data: data, title: 'Delete', message: ''});
   })
 });
 
@@ -44,6 +44,12 @@ router.get('/add', function (req, res) {
 router.get('/update', function (req, res) {
   Image.find({}, function (err, data) {
     res.render('update', {title: 'Update', message: '', data: data});
+  })
+})
+
+router.get('/getAll', function (req, res) {
+  Image.find({}, function (err, data) {
+    res.send(data);
   })
 })
 
@@ -72,12 +78,12 @@ router.post('/addPic', function (req, res) {
 
 router.post('/updatePic', function (req, res) {
 
-  var linkAnhCu = req.body.linkAnhCu
+  var _id = req.body._id
   var tenAnhMoi = req.body.tenAnhMoi
   var noiDungMoi = req.body.noiDungMoi
   var linkAnhMoi = req.body.linkAnhMoi
 
-  Image.updateMany({linkAnh: linkAnhCu}, {
+  Image.updateOne({_id: _id}, {
     tenAnh: tenAnhMoi,
     noiDung: noiDungMoi,
     linkAnh: linkAnhMoi
@@ -92,9 +98,19 @@ router.post('/updatePic', function (req, res) {
   })
 })
 
-router.post('/deletePic', async function (req, res) {
-  const image = await Image.findOne({});
-  await Image.deleteOne({_id: image._id})
+router.post('/deletePic', function (req, res) {
+
+  var _id = req.body._id
+
+  Image.deleteOne({_id: _id}, function (error, data) {
+    var mess;
+    if (error == null) {
+      mess = 'Deleted Successfully !'
+    } else {
+      mess = error
+    }
+    res.render('delete', {title: 'Delete', message: mess, data: data})
+  })
 })
 
 module.exports = router;
