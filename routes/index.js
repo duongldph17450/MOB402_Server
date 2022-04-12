@@ -72,11 +72,13 @@ router.post('/addPic', function (req, res) {
 
 router.post('/updatePic', function (req, res) {
 
+  var linkAnhCu = req.body.linkAnhCu
   var tenAnhMoi = req.body.tenAnhMoi
   var noiDungMoi = req.body.noiDungMoi
   var linkAnhMoi = req.body.linkAnhMoi
 
-  Image.updateOne({tenAnh: tenAnhMoi}, {
+  Image.updateMany({linkAnh: linkAnhCu}, {
+    tenAnh: tenAnhMoi,
     noiDung: noiDungMoi,
     linkAnh: linkAnhMoi
   }, function (error, data) {
@@ -91,7 +93,7 @@ router.post('/updatePic', function (req, res) {
 })
 
 router.post('/deletePic', async function (req, res) {
-  const image = await Image.findOne();
+  const image = await Image.findOne({});
   await Image.deleteOne({_id: image._id})
 })
 
