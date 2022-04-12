@@ -53,6 +53,29 @@ router.get('/getAll', function (req, res) {
   })
 })
 
+router.post('/them', function (req, res) {
+
+  var tenAnh = req.body.tenAnh
+  var noiDung = req.body.noiDung
+  var linkAnh = req.body.linkAnh
+
+  // buoc 3: khoi tao image voi gia tri lay duoc
+  const image = new Image({
+    tenAnh: tenAnh,
+    noiDung: noiDung,
+    linkAnh: linkAnh
+  })
+  image.save(function (error) {
+    var mess;
+    if (error == null) {
+      mess = 'Added successfully'
+    } else {
+      mess = error
+    }
+    res.send({title: 'Add', message: mess})
+  })
+})
+
 router.post('/addPic', function (req, res) {
 
   var tenAnh = req.body.tenAnh
