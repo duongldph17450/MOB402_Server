@@ -66,13 +66,7 @@ router.post('/them', function (req, res) {
     linkAnh: linkAnh
   })
   image.save(function (error) {
-    var mess;
-    if (error == null) {
-      mess = 'Added successfully'
-    } else {
-      mess = error
-    }
-    res.send({title: 'Add', message: mess})
+    res.send({title: error.message, message: mess})
   })
 })
 
